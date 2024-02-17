@@ -91,18 +91,68 @@ namespace oi
 };
 using oi::read;
 
-#define N 1000010
+#define N 5020
 
 
-int 
+int n,m;
+vector<pair<int,int>>edge;
+int W[N],A[N];
+pair<int,int>ww[N];
+vector<int>e[N];
+int order[N];
+
+
+bool cmp(int x,int y)
+{
+	return W[x]<W[y];
+}
+
+LL dp[N];
+LL X[N];
 
 int main()
 {
-	
-	
-	
-	
-	
+	cin>>n>>m;
+	for(int i=0;i<m;i++)
+	{
+		int x,y;
+		cin>>x>>y;
+		edge.push_back(make_pair(x,y));
+	}
+	for(int i=1;i<=n;i++)
+	{
+		cin>>W[i];
+	}
+	for(int i=1;i<=n;i++)
+	{
+		cin>>A[i];
+	}
+	for(int i=0;i<m;i++)
+	{
+		if(W[edge[i].first]>W[edge[i].second]) e[edge[i].first].push_back(edge[i].second);
+		if(W[edge[i].first]<W[edge[i].second]) e[edge[i].second].push_back(edge[i].first);
+	}
+	for(int i=1;i<=n;i++) order[i]=i;
+	sort(order+1,order+n+1,cmp);
+	for(int i=1;i<=n;i++) X[i]=1;
+	for(int i=1,x;i<=n;i++)
+	{
+		x=order[i];
+		memset(dp,0,sizeof(dp));
+		dp[0]=1;
+		for(unsigned int j=0;j<e[x].size();j++)
+		{
+			int y=e[x][j];
+			for(int k=W[x]-1;k-W[y]>=0;k--)
+			{
+				dp[k]=max(dp[k],dp[k-W[y]]+X[y]);
+			}
+		}
+		for(int k=0;k<=5000;k++) X[x]=max(X[x],dp[k]);
+	}
+	LL ans=0;
+	for(int i=1;i<=n;i++) ans+=X[i]*A[i];
+	cout<<ans;
 	
 	
 	return 0;

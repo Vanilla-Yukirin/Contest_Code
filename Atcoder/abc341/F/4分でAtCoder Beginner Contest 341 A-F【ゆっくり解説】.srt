@@ -1,0 +1,388 @@
+1
+00:00:01,000 --> 00:00:01,867
+Problem A
+
+2
+00:00:01,867 --> 00:00:03,567
+An integer N is input.
+
+3
+00:00:03,567 --> 00:00:07,633
+Output 1 and 0 alternately, with 1 being output N+1 times and 0 being output N times.
+
+4
+00:00:08,633 --> 00:00:11,467
+Maybe it's easier to just write 10 N times and then add a 1?
+
+5
+00:00:11,467 --> 00:00:14,633
+In C++ or something, you'd probably end up writing a loop.
+
+6
+00:00:14,633 --> 00:00:17,333
+The code is also in the "Explanation" section, so feel free to check it out.
+
+7
+00:00:18,833 --> 00:00:19,700
+Problem B
+
+8
+00:00:19,700 --> 00:00:22,100
+There are coins from N countries, each in some amount.
+
+9
+00:00:22,100 --> 00:00:25,733
+You can exchange some number of coins from country 1 for some number of coins from country 2.
+
+10
+00:00:25,733 --> 00:00:27,200
+This can be done any number of times.
+
+11
+00:00:27,200 --> 00:00:29,067
+The same applies to countries 2 and 3.
+
+12
+00:00:29,067 --> 00:00:32,232
+If N were larger, the same would apply to countries 3 and 4, and so on.
+
+13
+00:00:32,232 --> 00:00:34,833
+What is the maximum number of coins you can get from country N?
+
+14
+00:00:34,833 --> 00:00:37,267
+N can be up to 200,000, just so you know.
+
+15
+00:00:37,267 --> 00:00:39,600
+There won't be an excessive increase in the number of coins.
+
+16
+00:00:40,600 --> 00:00:43,533
+First, divide to see how many times you can exchange from 1 to 2,
+
+17
+00:00:43,533 --> 00:00:45,600
+actually make that number of exchanges,
+
+18
+00:00:45,600 --> 00:00:47,967
+then repeat from 2 to 3...
+
+19
+00:00:47,967 --> 00:00:51,833
+The order of multiplication and division is quite important in programming, huh?
+
+20
+00:00:51,833 --> 00:00:54,933
+Because you can't exchange half a time in this case.
+
+21
+00:00:56,433 --> 00:00:57,333
+Problem C
+
+22
+00:00:57,333 --> 00:00:59,600
+There's a 2D field made of land and sea.
+
+23
+00:00:59,600 --> 00:01:01,700
+Taro starts from a square
+
+24
+00:01:01,700 --> 00:01:03,233
+and makes a certain pattern of moves.
+
+25
+00:01:03,233 --> 00:01:05,567
+It's unknown from which square he started, but
+
+26
+00:01:05,567 --> 00:01:08,333
+it's known that he didn't fall into the sea during the process.
+
+27
+00:01:08,333 --> 00:01:10,867
+How many squares could he possibly be on now?
+
+28
+00:01:10,867 --> 00:01:14,667
+The field is at most 500×500, and the number of moves is at most 500.
+
+29
+00:01:14,667 --> 00:01:18,033
+By the way, the outer perimeter is all sea, which might make things a bit easier.
+
+30
+00:01:19,067 --> 00:01:20,800
+Try all starting squares...
+
+31
+00:01:20,800 --> 00:01:21,567
+Wouldn't that work?
+
+32
+00:01:21,567 --> 00:01:23,767
+500 cubed is 125 million,
+
+33
+00:01:23,767 --> 00:01:25,833
+which might or might not be feasible depending on the language,
+
+34
+00:01:25,833 --> 00:01:29,533
+and there's no easy way to improve it, so we have to go with that.
+
+35
+00:01:29,533 --> 00:01:30,833
+What if it doesn't fit in time?
+
+36
+00:01:30,833 --> 00:01:33,900
+Have ChatGPT translate it into C++ for you.
+
+37
+00:01:35,400 --> 00:01:36,300
+Problem D
+
+38
+00:01:36,300 --> 00:01:39,067
+We're interested in things such as
+
+39
+00:01:39,067 --> 00:01:40,333
+"integers that are exactly divisible by either 4 or 6, but not both."
+
+40
+00:01:40,333 --> 00:01:43,433
+So 12, which is divisible by both 4 and 6, is excluded.
+
+41
+00:01:43,433 --> 00:01:46,367
+Find the fifth smallest number in this list.
+
+42
+00:01:46,367 --> 00:01:49,300
+...That's just an example, the actual numbers will be much larger.
+
+43
+00:01:50,300 --> 00:01:53,033
+Pinpointing the answer might be difficult,
+
+44
+00:01:53,033 --> 00:01:57,133
+but asking "Is the answer less than or equal to 20?" isn't too hard.
+
+45
+00:01:57,133 --> 00:02:00,967
+It's the same as asking "Are there more than 5 numbers less than or equal to 20 in the list?"
+
+46
+00:02:00,967 --> 00:02:04,433
+A classic example where starting with binary search makes things clearer.
+
+47
+00:02:04,433 --> 00:02:07,200
+So we just need to count the numbers less than or equal to 20 in the list,
+
+48
+00:02:07,200 --> 00:02:09,532
+count multiples of 4 and 6,
+
+49
+00:02:09,532 --> 00:02:11,633
+and subtract multiples of 12 twice.
+
+50
+00:02:11,633 --> 00:02:14,900
+In C++, the least common multiple can be handled with a library.
+
+51
+00:02:16,400 --> 00:02:17,233
+Problem E
+
+52
+00:02:17,233 --> 00:02:18,700
+There's a sequence of 0s and 1s.
+
+53
+00:02:18,700 --> 00:02:20,333
+Follow two types of queries.
+
+54
+00:02:20,333 --> 00:02:21,167
+Query 1
+
+55
+00:02:21,167 --> 00:02:23,767
+Invert all values in a specific range.
+
+56
+00:02:23,767 --> 00:02:26,167
+Turn 0s into 1s, and 1s into 0s, right?
+
+57
+00:02:26,167 --> 00:02:26,933
+Query 2
+
+58
+00:02:26,933 --> 00:02:30,900
+Determine if 0s and 1s appear in perfect alternation within a specific range.
+
+59
+00:02:30,900 --> 00:02:34,000
+The length of the sequence and the number of queries are both up to 500,000.
+
+60
+00:02:35,000 --> 00:02:38,100
+Mark places where the same number appears consecutively.
+
+61
+00:02:38,100 --> 00:02:40,200
+Then, when flipping,
+
+62
+00:02:40,200 --> 00:02:42,600
+actually, nothing happens except at the ends.
+
+63
+00:02:42,600 --> 00:02:44,367
+To determine if it's alternating,
+
+64
+00:02:44,367 --> 00:02:46,633
+if there's not even one mark inside, it's OK.
+
+65
+00:02:46,633 --> 00:02:48,633
+If there's even one, it's not OK.
+
+66
+00:02:48,633 --> 00:02:52,100
+So, we can just put the number of marks into a segment tree.
+
+67
+00:02:52,100 --> 00:02:54,567
+A Binary Indexed Tree is also sufficient,
+
+68
+00:02:54,567 --> 00:02:58,800
+and since it's just about finding 1s, a balanced binary search tree like std::set would also work,
+
+69
+00:02:58,800 --> 00:03:02,733
+but with these constraints, using a balanced binary search tree in Python is like a dare.
+
+70
+00:03:02,733 --> 00:03:06,900
+By the way, the talk about marks corresponds to taking the difference mod 2.
+
+71
+00:03:08,400 --> 00:03:09,367
+Problem F
+
+72
+00:03:09,367 --> 00:03:10,600
+There's an undirected graph,
+
+73
+00:03:10,600 --> 00:03:12,733
+with a weight assigned to each vertex.
+
+74
+00:03:12,733 --> 00:03:15,333
+Additionally, there are several pieces on each vertex.
+
+75
+00:03:15,333 --> 00:03:16,533
+Choose one piece,
+
+76
+00:03:16,533 --> 00:03:19,833
+and select several vertices adjacent to the vertex where the piece is.
+
+77
+00:03:19,833 --> 00:03:22,633
+The total weight of the selected vertices
+
+78
+00:03:22,633 --> 00:03:25,400
+must be less than the weight of the vertex with the piece.
+
+79
+00:03:25,400 --> 00:03:27,633
+Then, remove the selected piece
+
+80
+00:03:27,633 --> 00:03:29,833
+and place one piece on each of the selected vertices.
+
+81
+00:03:29,833 --> 00:03:33,033
+How many times can this series of operations be repeated?
+
+82
+00:03:33,033 --> 00:03:36,433
+If there's nowhere to go after choosing a piece, the only option is to remove it, right?
+
+83
+00:03:36,433 --> 00:03:36,967
+Ah, yes.
+
+84
+00:03:36,967 --> 00:03:40,667
+The number of vertices and edges, and the weights are all up to 5000, and there are plenty of pieces.
+
+85
+00:03:41,667 --> 00:03:43,133
+It sounds complicated, but,
+
+86
+00:03:43,133 --> 00:03:44,533
+you said "less than," right?
+
+87
+00:03:44,533 --> 00:03:46,767
+So, the undirected graph thing is a lie,
+
+88
+00:03:46,767 --> 00:03:49,533
+it's a one-way street from larger to smaller.
+
+89
+00:03:49,533 --> 00:03:50,800
+It's a DAG, then.
+
+90
+00:03:50,800 --> 00:03:52,900
+So, we'll look in ascending order.
+
+91
+00:03:52,900 --> 00:03:54,733
+Since pieces don't interact with each other,
+
+92
+00:03:54,733 --> 00:03:58,000
+if we know how many operations can be done with one piece,
+
+93
+00:03:58,000 --> 00:04:01,433
+it's like solving a knapsack problem N times.
+
+94
+00:04:01,433 --> 00:04:05,033
+We didn't have time for Problem G, but I'll introduce a similar problem.
+
+95
+00:04:05,033 --> 00:04:07,433
+If you liked it, please subscribe to the channel.
+
+96
+00:04:07,433 --> 00:04:07,433
+Thank you for watching!
+
+97
+00:04:07,433 --> 00:04:09,267
+Thank you for watching!
+
