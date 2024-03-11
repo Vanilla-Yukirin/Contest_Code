@@ -32,16 +32,13 @@ using namespace std;
 
 
 
-#define N 2010
-const LL inf = 1000000009;
-LL dp[N][N];
-LL last[N][N];
+#define N 20010
+
 int n,l;
 pair<LL,LL>mess[N];
-
+const int inf = 1000000009;
+LL dp[N];
 int ans;
-
-
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -54,55 +51,36 @@ int main()
 		cin>>n>>l;
 		ans=0;
 		memset(dp,0,sizeof(dp));
-		memset(last,0,sizeof(last));
 		for(int i=1;i<=n;i++)
 		{
 			cin>>mess[i].second>>mess[i].first;
 		}
 		sort(mess+1,mess+1+n);
+		LL a,b;
+		for(int i=1;i<=n;i++) if(mess[i].second<=l) ans=1;
 		
-//		for(int i=1;i<=n;i++)
-//		{
-//			cout<<mess[i].second<<" "<<mess[i].first<<endl;
-//		}
-		
-		
+		for(int i=1;i<=n;i++) dp[i]=inf;
 		for(int i=1;i<=n;i++)
 		{
-			last[i][1]=mess[i].second;
-			for(int k=2;k<=n;k++) last[i][k]=inf;
-		}
-		
-		
-		for(int len=2;len<=n;len++)
-		{
-			for(int i=1;i+len-1<=n;i++)
-			{
-				for(int k=1;k<=len;k++)
-				{
-					dp[i][k]=last[i][k];
-					dp[i][k]=min(dp[i][k],last[i][k-1]+mess[i+len-1].second);
-					dp[i][k]=min(dp[i][k],last[i+1][k]);
-					dp[i][k]=min(dp[i][k],last[i+1][k-1]+mess[i].second);
-//					if(dp[i][k]>l) break;
-					int calc=dp[i][k]+mess[i+len-1].first-mess[i].first;
-					if(calc<=l)
-					{
-						
-						ans=max(ans,k);
-					}
-					
-					cout<<"dp "<<i<<"-"<<i+len-1<<" k="<<k<<" == "<<dp[i][k]<<endl;
-				}
-			}
-			for(int i=1;i<=n;i++)
-				for(int j=1;j<=n;j++)
-					last[i][j]=dp[i][j];
+			a=mess[i].second;
+			b=mess[i].first;
 			
+			for(int j=0;j<=n;j++)
+			{
+				if(a+b+dp[j]<=l) ans=max(ans,j+1);
+			}
+			
+			for(int j=n;j>=1;j--)
+			{
+				dp[j]=min(dp[j],dp[j-1]+a);
+			}
+			dp[1]=min(dp[1],a-b);
+			
+			//for(int j=1;j<=n;j++) cout<<dp[j]<<" ";
+			//cout<<endl;
 			
 		}
 		cout<<ans<<endl;
-		
 		
 	}
 	return 0;
