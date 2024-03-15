@@ -32,29 +32,28 @@ using namespace std;
 
 
 
-#define N 200010
+#define N 1000010
 
-LL n,m,k;
-LL a[N],d[N],f[N];
-LL goal,mx,cmx;
-LL L,R;
-LL minans;
+
+int a[N],d[N],f[N];
+vector<int>sum;
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	cout.tie(0);
 	cout.precision(10);
+	freopen("F.in","r",stdin);
 	int t=1;
 	cin>>t;
 	while(t--)
 	{
+		int n,m,k;
 		cin>>n>>m>>k;
 		for(int i=1;i<=n;i++)
 		{
 			cin>>a[i];
 		}
-		sort(a+1,a+n+1);
 		for(int i=1;i<=m;i++)
 		{
 			cin>>d[i];
@@ -63,37 +62,20 @@ int main()
 		{
 			cin>>f[i];
 		}
-		mx=0;
-		cmx=0;
-		for(int i=2;i<=n;i++)
-		{
-			if(a[i]-a[i-1]>mx) cmx=mx,mx=a[i]-a[i-1],goal=a[i]+a[i-1],L=i-1,R=i;
-			else if(a[i]-a[i-1]>cmx) cmx=a[i]-a[i-1];
-		}
-		//cout<<"mx="<<mx<<" cmx"<<cmx<<endl;
-		minans=mx;
-		sort(f+1,f+k+1);
+		
+		
+		for(int i=2;i<=n;i++) cout<<a[i]-a[i-1]<<" ";
+		cout<<endl;
 		for(int i=1;i<=m;i++)
 		{
-			int l=1,r=k,mid,ans=1;
-			while(l<=r)
+			for(int j=1;j<=k;j++)
 			{
-				mid=l+r>>1;
-				if((d[i]+f[mid])*2<=goal) ans=mid,l=mid+1;
-				else r=mid-1;
+				sum.push_back(d[i]+f[j]);
 			}
-			//cout<<"for "<<d[i]<<" , i find f"<<ans<<" = "<<f[ans]<<endl;
-			if(ans&&d[i]+f[ans]<a[R]&&d[i]+f[ans]>a[L])
-				minans=min(minans,max(d[i]+f[ans]-a[L],a[R]-d[i]-f[ans]));
-//			minans=min(minans,);
-			ans++;
-			if(ans<=k&&d[i]+f[ans]<a[R]&&d[i]+f[ans]>a[L])
-				minans=min(minans,max(d[i]+f[ans]-a[L],a[R]-d[i]-f[ans]));
-			
 		}
 		
-		cout<<max(minans,cmx)<<endl;
-		
+		sort(sum.begin(),sum.end());
+		for(int i=0;i<(int)sum.size();i++) cout<<sum[i]<<" ";
 		
 	}
 	return 0;
