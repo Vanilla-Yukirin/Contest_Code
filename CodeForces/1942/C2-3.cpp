@@ -72,7 +72,7 @@ int main()
 		}
 		delta[(a[1]-a[x])%n+n]++;
 		auto it=delta.end();
-		max_delta=it->first;
+//		max_delta=it->first;
 		
 		for(it=delta.begin();it!=delta.end();it++)
 		{

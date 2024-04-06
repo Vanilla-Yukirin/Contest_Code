@@ -1,4 +1,14 @@
-#include<bits[表情]dc++.h>
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<map>
+#include<set>
+#include<queue>
+#include<vector>
+#include<limits.h>
 using namespace std;
 #define ll int
 
@@ -14,7 +24,7 @@ signed main(){
 		ll b[x+1];
 		ll y1=y;
 		for(ll i=1;i<=x;i++){
-			scanf("%lld",&p);
+			scanf("%d",&p);
 			b[i]=p;
 		}
 		sort(b+1,b+1+x);
