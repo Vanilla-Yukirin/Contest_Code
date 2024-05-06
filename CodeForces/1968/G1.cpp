@@ -68,6 +68,7 @@ int main()
 				if(fd==(int)string::npos) break;
 				cnt++;
 				it=fd+head.size();
+				if(cnt>=k) break;
 			}
 			if(cnt>=k)
 			{
