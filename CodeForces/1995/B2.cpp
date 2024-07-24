@@ -96,7 +96,7 @@ int main()
 //				ans=max(ans,try1*k1+try2*k2);
 //				if(try1*k1+try2*k2>=m) break;
 //			}
-			LL dis=m-try1*k1+try2*k2;
+			LL dis=m-try1*k1-try2*k2;
 			LL lim=min(try1,up2-try2);
 			if(lim<=dis)
 			{
