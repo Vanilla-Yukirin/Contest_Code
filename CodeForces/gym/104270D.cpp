@@ -78,7 +78,8 @@ bool eq(vector<int>x,vector<int>y)
 
 void check(int a1,vector<int>b,int used)
 {
-//	cout<<"a1="<<a1<<"\n";
+//	cout<<"check:";
+//	cout<<"a1="<<a1<<"\t";
 //	for(unsigned int j=0;j<b.size();j++)
 //	{
 //		cout<<b[j]<<" ";
@@ -95,11 +96,68 @@ void check(int a1,vector<int>b,int used)
 		int temp=c[used];
 		used++;
 		
-		if(temp%a1==0&&temp/a1<10)
+		if(temp%b[0]==0&&temp/b[0]<10)
 		{
-			b.push_back(temp/a1);
-			dfs(a1,b,used);
-			b.pop_back();
+			a.push_back(temp/b[0]);
+		}
+		else
+		{
+			if((unsigned int)used==c.size()) return;
+			headc.push_back(c[used]);
+			temp=temp*10+c[used];
+			used++;
+			if(temp%b[0]==0&&temp/b[0]<10)
+			{
+				a.push_back(temp/b[0]);
+			}
+			else return;
+		}
+//		cout<<"a_"<<i+1<<"="<<a.back()<<endl;
+		for(int j=1;j<m;j++)
+		{
+			bool flag=0;
+			if((unsigned int)used==c.size()) return;
+			vector<int>headc;
+			headc.push_back(c[used]);
+			int temp=c[used];
+			used++;
+			
+			if(a[i]*b[j]==temp)
+			{
+				flag=1;
+			}
+			else
+			{
+				if((unsigned int)used==c.size()) return;
+				headc.push_back(c[used]);
+				temp=temp*10+c[used];
+				used++;
+				if(a[i]*b[j]==temp)
+				{
+					flag=1;
+				}
+				else return;
+			}
+			if(!flag) return;
+		}
+	}
+	if(used==c.size()&&a.size()==n)
+	{
+//		cout<<"get ans"<<endl;
+		succ=1;
+//		for(unsigned int i=0;i<a.size();i++)
+//		{
+//			cout<<a[i]<<" ";
+//		}
+//		for(unsigned int j=0;j<b.size();j++)
+//		{
+//			cout<<b[j]<<" ";
+//		}
+//		cout<<endl;
+		if(min_a.size()==0||le(a,min_a)||(eq(a,min_a)&&le(b,min_b)))
+		{
+			min_a=a;
+			min_b=b;
 		}
 	}
 }
@@ -130,6 +188,7 @@ void dfs(int a1,vector<int>b,int used)
 	headc.push_back(c[used]);
 	temp=temp*10+c[used];
 	used++;
+	if(temp==0) return;
 	
 	if(temp%a1==0&&temp/a1<10)
 	{
@@ -152,6 +211,8 @@ int main()
 	{
 		cin>>n>>m;
 		c.clear();
+		min_a.clear();
+		min_b.clear();
 		succ=0;
 		string str;cin>>str;
 		for(unsigned int i=0;i<str.size();i++)
@@ -166,10 +227,12 @@ int main()
 		
 		if(succ)
 		{
+//			cout<<"output ans"<<endl;
 			for(unsigned int i=0;i<min_a.size();i++)
 			{
 				cout<<min_a[i];
 			}
+			cout<<" ";
 			for(unsigned int i=0;i<min_b.size();i++)
 			{
 				cout<<min_b[i];
