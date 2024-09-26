@@ -181,6 +181,7 @@ void dfs(int a1,vector<int>b,int used)
 		b.push_back(temp/a1);
 		dfs(a1,b,used);
 		b.pop_back();
+		return;
 	}
 	
 	
