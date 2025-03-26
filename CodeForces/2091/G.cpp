@@ -36,30 +36,82 @@ using namespace std;
 #define N 1000010
 
 LL s,k;
+vector<bool>vec,nxt;
 void solve()
 {
 	cin>>s>>k;
-	bool right=1;
-	int now=0;
-	for(int kk=k;kk>=1;kk-=2)
+	if(s>=k*k)
 	{
-		now+=1;
-		if((s-now)%kk==0)
+		if(s%k==0) cout<<k<<endl;
+		else cout<<max(1ll,k-2)<<endl;
+	}
+	else
+	{
+		vec.clear();
+		vec.resize(s+1);
+		nxt.clear();
+		nxt.resize(s+1);
+		vec[0]=k;
+		for(int i=0;i<=s;i+=k) vec[i]=1;
+		if(vec[s])
 		{
-			cout<<kk<<endl;
+			cout<<k<<endl;
 			return;
 		}
-//		right=~right;
+		bool right=0;
+		for(int kk=k-1;kk>=1;kk--)
+		{
+//			DEBUG(kk,2);
+			if(right)
+			{
+				for(int i=0;i<=s;i++)
+				{
+					if(vec[i])
+					{
+						for(int j=i+kk;j<=s;j+=kk)
+						{
+							nxt[j]=1;
+						}
+					}
+				}
+			}
+			else
+			{
+				for(int i=s;i>=0;i--)
+				{
+					if(vec[i])
+					{
+						for(int j=i-kk;j>=0;j-=kk)
+						{
+							nxt[j]=1;
+						}
+					}
+				}
+			}
+//			for(int i=0;i<=s;i++) cout<<nxt[i]<<" ";cout<<endl;
+			if(nxt[s])
+			{
+				cout<<kk<<endl;
+				return;
+			}
+			vec=nxt;
+			nxt.clear();
+			nxt.resize(s+1);
+			right=!right;
+		}
+		
+		cout<<1<<endl;
+		
+		
 	}
-	cout<<1<<endl;
 }
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-	cout.precision(10);
+//	ios::sync_with_stdio(false);
+//	cin.tie(0);
+//	cout.tie(0);
+//	cout.precision(10);
 	int t=1;
 	cin>>t;
 	LOOP(t)
