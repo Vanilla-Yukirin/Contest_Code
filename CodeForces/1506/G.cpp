@@ -1,6 +1,6 @@
 /**************************************************************
  * Problem: 
- * Author: Vanilla_chan
+ * Author: ArisuVanilla
  * Date: 
  * E-Mail: heshaohong2015@outlook.com
  **************************************************************/
@@ -12,7 +12,7 @@
 #define ULL unsigned long long
 #define ull unsigned long long
 #define mk(a,b) make_pair(a,b)
-#define pb(a) push_back(a)
+#define pb(a,b) push_back(a,b)
 #define endl '\n'
 #ifdef TH
 #define debug cout<<"Now is "<<__LINE__<<endl;
@@ -33,77 +33,56 @@ cout.flush();
 using namespace std;
 
 
-#define N 1000010
-
-LL s,k;
-vector<bool>vec,nxt;
+#define N 200010
+int n;
+string s;
+int cnt[N];
+vector<int>pos[200];
 void solve()
 {
-	cin>>s>>k;
-	if(s>=k*k)
+	for(int i='a';i<='z';i++) pos[i].clear();
+	
+	cin>>s;
+	n=s.size();
+	s=" "+s;
+	cnt[n+1]=0;
+	for(int i=n;i>=1;i--)
 	{
-		if(s%k==0) cout<<k<<endl;
-		else cout<<max(1ll,k-2)<<endl;
+		cnt[i]=cnt[i+1];
+		cnt[i]|=(1<<(s[i]-'a'));
 	}
-	else
+	for(int i=1;i<=n;i++) pos[s[i]].push_back(i);
+	string t;
+	int now=0,remain=cnt[1];
+	int m=0;
+	for(int k=0;k<=30;k++) if(remain&(1<<k)) m++;
+	for(int i=0;i<m;i++)
 	{
-		vec.clear();
-		vec.resize(s+1);
-		nxt.clear();
-		nxt.resize(s+1);
-		vec[0]=k;
-		for(int i=0;i<=s;i+=k) vec[i]=1;
-		if(vec[s])
+//		DEBUG(i,1);
+		int jump=0;
+		for(char ch='z';ch>='a';ch--)
 		{
-			cout<<k<<endl;
-			return;
-		}
-		bool right=0;
-		for(int kk=k-1;kk>=1;kk--)
-		{
-//			DEBUG(kk,2);
-			if(right)
+			if((remain&(1<<(ch-'a')))==0) continue;
+//			DEBUG(ch,2);
+			int p=upper_bound(pos[ch].begin(),pos[ch].end(),now)-pos[ch].begin();
+//			DEBUG(p,3);
+			if(p==pos[ch].size()) continue;
+			if(((cnt[pos[ch][p]]|(1<<(ch-'a')))&remain)==remain)
 			{
-				for(int i=0;i<=s;i++)
-				{
-					if(vec[i])
-					{
-						for(int j=i+kk;j<=s;j+=kk)
-						{
-							nxt[j]=1;
-						}
-					}
-				}
+				jump=pos[ch][p];
+//				cout<<"ready jump to "<<jump<<endl;
 			}
-			else
+			if(jump)
 			{
-				for(int i=s;i>=0;i--)
-				{
-					if(vec[i])
-					{
-						for(int j=i-kk;j>=0;j-=kk)
-						{
-							nxt[j]=1;
-						}
-					}
-				}
+				remain&=(~(1<<(ch-'a')));
+				now=jump;
+				t.push_back(ch);
+				break;
 			}
-//			for(int i=0;i<=s;i++) cout<<nxt[i]<<" ";cout<<endl;
-			if(nxt[s])
-			{
-				cout<<kk<<endl;
-				return;
-			}
-			vec=nxt;
-			nxt.clear();
-			nxt.resize(s+1);
-			right=!right;
 		}
 		
-		cout<<1<<endl;
-		
-		
 	}
+	cout<<t<<endl;
 }
 
 int main()
@@ -111,7 +90,7 @@ int main()
 //	ios::sync_with_stdio(false);
 //	cin.tie(0);
 //	cout.tie(0);
-//	cout.precision(10);
+	cout.precision(10);
 	int t=1;
 	cin>>t;
 	LOOP(t)
