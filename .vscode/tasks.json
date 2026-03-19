@@ -14,7 +14,7 @@
         "-Wshadow",
         "-DTH",
         "-I",
-        "${workspaceFolder}",
+        "${workspaceFolder}/common",
         "${file}",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
