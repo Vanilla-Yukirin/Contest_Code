@@ -1,4 +1,4 @@
-# 将template.cpp的内容生成.vscode/cp.code-snippets
+# 用template.cpp生成cp.code-snippets
 import json
 from pathlib import Path
 
@@ -13,8 +13,9 @@ snippet = {
     }
 }
 
-output_path = Path(".vscode") / "cp.code-snippets"
-output_path.parent.mkdir(parents=True, exist_ok=True)
+# output_path = Path(".vscode") / "cp.code-snippets"
+# output_path.parent.mkdir(parents=True, exist_ok=True)
+output_path = "cp.code-snippets"
 
 with open(output_path, "w", encoding="utf-8") as f:
     json.dump(snippet, f, ensure_ascii=False, indent=2)
