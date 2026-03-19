@@ -12,6 +12,9 @@
         "-Wall",
         "-Wextra",
         "-Wshadow",
+        "-DTH",
+        "-I",
+        "${workspaceFolder}",
         "${file}",
         "-o",
         "${fileDirname}\\${fileBasenameNoExtension}.exe"
