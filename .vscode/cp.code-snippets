@@ -117,8 +117,7 @@
       "\t\tsolve();",
       "\t}",
       "\treturn 0;",
-      "}",
-      "cp"
+      "}"
     ],
     "description": "竞赛代码模板"
   }
